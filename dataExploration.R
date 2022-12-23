@@ -5,22 +5,26 @@
 
 library(readxl)
 library(tidyverse)
+library(lubridate)
 
-setwd("/Users/kendrakaiser/Documents/github/StreamflowCatalog")
-
+setwd("/Users/kendrakaiser/github/StreamflowCatalog")
+#did a find and replace on the xls to change current to 12-23-2022
 catalog<- read_excel("data/Streamflow_Catalog.xlsx")
 cat_new<- catalog %>% filter(organization != "United States Geological Survey") %>% filter(!is.na(organization))
+
 cat_new$start <- cat_new$start %>% as.numeric() %>%  as.Date(origin = "1899-12-30")
 cat_new$end <- cat_new$end %>% as.numeric() %>%  as.Date(origin = "1899-12-30")
+cat_new$status[is.na(cat_new$status)] <- "unknown"
 
 
-cont<- cat_new  %>% filter(meas.freq  == 'continuous') #2707
+cont<- cat_new  %>% filter(meas.freq  == 'continuous') #2638
 syn<- cat_new  %>% filter(meas.freq  == 'synoptic') #17854
 seas<- cat_new  %>% filter(meas.freq  == 'seasonal') #43
 unk<- cat_new  %>% filter(meas.freq  == 'unknown') 
 naa<- cat_new  %>% filter(is.na(meas.freq))
-cont_active <- cont %>% filter(status  == 'active') #592
-cont_inactive <- cont %>% filter(status  == 'inactive') #858 (means 1320 are unknown)
+cont_active <- cont %>% filter(status  == 'active') #582
+cont_inactive <- cont %>% filter(status  == 'inactive') #827 (means 1320 are unknown)
+cont_uk<-  cont %>% filter(status  == 'unknown') #1229
 
 ID_cont <- cat_new %>% filter(meas.freq  == 'continuous') %>% filter(state == "Idaho")
 
@@ -61,4 +65,34 @@ cont.canal<-cont %>% filter(`stream type` == 'canal') #402
 
 cont.i<-cont %>% filter(`interval` == 'unknown') #1275  %47
 sum(is.na(cont$method))
-sum(is.na(cont$instrumentation)) $2495
+sum(is.na(cont$instrumentation)) #2495
+
+# USGS data comparison
+usgs_time<- read_excel('data/USGS_streamgage_figure.xlsx')
+
+cont_comp<-cont
+for (i in 1:2368){
+  if (is.na(cont_comp$start[i]) && !is.na(cont_comp$end[i]))
+  {cont_comp$start[i] <- (cont_comp$end[i])}
+  if (is.na(cont_comp$end[i]) && !is.na(cont_comp$start[i]))
+  {cont_comp$end[i] <- (cont_comp$start[i])}
+}
+
+cont_comp<- cont_comp[!is.na(cont_comp$start),]
+
+non_gs<- as.data.frame(matrix(data=NA, nrow=159, ncol=dim(cont_comp)[1]))
+for (i in 1:159){
+  for (j in 1:dim(cont_comp)[1]){
+    if (year(cont_comp$start[j]) <= usgs_time$year[i] && year(cont_comp$end[j]) >=usgs_time$year[i])
+    {non_gs[i,j]<-1}
+    else{non_gs[i,j]<-0}
+  }
+}
+
+usgs_time$non_gs<-rowSums(non_gs)
+gs_long <- pivot_longer(usgs_time, !Year, values_to = 'count')
+gs_long_simp <- gs_long %>% filter(name == 'PNW' | name == 'non_gs' | name == 'Nationwide')
+ggplot(gs_long_simp, aes(x=Year, y=count, color=name)) +
+  geom_line()+
+  theme_bw()
+
