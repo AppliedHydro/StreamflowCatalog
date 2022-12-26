@@ -92,7 +92,16 @@ for (i in 1:159){
 usgs_time$non_gs<-rowSums(non_gs)
 gs_long <- pivot_longer(usgs_time, !Year, values_to = 'count')
 gs_long_simp <- gs_long %>% filter(name == 'PNW' | name == 'non_gs' | name == 'Nationwide')
+
 ggplot(gs_long_simp, aes(x=Year, y=count, color=name)) +
   geom_line()+
-  theme_bw()
+  theme_bw() +
+  scale_x_continuous(breaks = round(seq(min(gs_long_simp$Year), max(gs_long_simp$Year), by = 20),1)) +
+  scale_y_continuous(breaks = round(seq(min(gs_long_simp$count), max(gs_long_simp$count), by = 1000),1))
 
+ggplot(cont$por_years)
+
+ggplot(cont, aes(x=por_years)) + geom_histogram()+theme_bw()+xlab("Period of Record (years)") +
+  ylab("Number of non-USGS continuous gages") +
+  scale_x_continuous(expand = c(0.01, 0.01), breaks = seq(0, 125, by = 20)) + 
+  scale_y_continuous(expand = c(0.01, 0.01), breaks = seq(0, 450, by = 50))
