@@ -1,1 +1,4 @@
+The Visualization Code subfolder holds all of the Python script used to create data visualization of the Streamflow Catalog project. These were used at various points and for varied purposes
+throughout the span of this project. All graphics were generated used MatPlotLib graphic library V3.6
+https://matplotlib.org/
 
