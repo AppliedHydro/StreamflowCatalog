@@ -11,7 +11,7 @@ def extract_date_components(date_value):
     except ValueError:
         return None, None, None
 
-file_path = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx'
+file_path = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx' #Streamflow Catalog location on local machine
 workbook = px.load_workbook(file_path)
 worksheet = workbook.active
 
@@ -20,7 +20,7 @@ data_dict = {}
 for row in worksheet.iter_rows(min_row=2, values_only=True):
     source = row[1]  
     
-    # Only consider rows where the source is 'USGS'
+    # Only consider rows where the source is 'USGS' #Use the USGS organization tag as a filter
     if source != 'USGS':
         continue
     unique_identifier = row[2]  # Assuming the unique identifier is in the third column
@@ -66,6 +66,10 @@ for unique_identifier, data in data_dict.items():
     
     combined_row = [unique_identifier] + list(data['rows'][0])[1:14] + [start_date_str, end_date_str] + list(data['rows'][0])[16:]
     combined_worksheet.append(combined_row)
+    
+#####
+#To ensure no cross contamination with original streamflow catalog, the new values are written into an excel file which can then be added to original catalog
+#####
 
 combined_file_path = "C:/Users/sjsch/Desktop/Kendra/Streamflow_Edit_Duplicates.xlsx"
 combined_workbook.save(combined_file_path)
