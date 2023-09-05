@@ -25,8 +25,9 @@ exceptions = []
 counter = 1
 
 print("Sorting through values...")
+print(f"There are {wb.max_row} rows in the catalog")
 #iterator for sorting values into variable containers
-for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=26883):
+for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=wb.max_row):
     for cell in row:
         counter += 1
         var = str(cell.value).lower()
