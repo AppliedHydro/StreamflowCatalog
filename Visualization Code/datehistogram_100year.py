@@ -1,9 +1,20 @@
+#####datehistogram_100year.py#####
+
+##############################################
+#Plots a histogram of dates of operation for #
+#catalog gages                               #
+##############################################
+
+#Variables
+#line 18 : edit file path to local streamflow catalog address
+
 from datetime import datetime
 import openpyxl as px           #handles catalog data as dataframe object
 import matplotlib.pyplot as plt #visualizes data 
 import numpy as np              #collections of calculation tools
 
 #import catalog as dataframe object
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 
@@ -13,8 +24,9 @@ unknown = []
 counter = 1
 
 #iterate through date values, discard 'unknowns' and convert rest into datetime object
+print(f"There are {wb.max_row} rows in the catalog")
 try:
-    for row in wb.iter_rows(min_col=15,max_col=15,min_row=2,max_row=26871):
+    for row in wb.iter_rows(min_col=15,max_col=15,min_row=2,max_row=wb.max_row):
         for cell in row:
             counter += 1
             date_format = ('%Y-%m-%d %H:%M:%S')
@@ -35,7 +47,7 @@ try:
                 elif var == 'unknown':
                     unknown.append(var)
                     continue
-                elif var == '2/1/1857':
+                elif var == '2/1/1857': #This is a specific default date value assigned to blank dates
                     years_start.append('1857')
                     years_end.append('2022')
                 elif str(wb.cell(counter,15).value) == '00:00:00':
@@ -58,7 +70,7 @@ except: #checks to ensure all values have been handled
 totals = []
 counter = 0
 try:        #calculate time total between start and end dates
-    for i in range(0,25526):
+    for i in range(0,wb.max_row):
         var = int(years_end[counter]) - int(years_start[counter])
         totals.append(var)
         counter += 1
@@ -75,3 +87,6 @@ axs.set_ylabel('quantity')
 axs.set_xlabel('years of operation')
 axs.set_xlim([0,100]) #constrain x-axis limitations for viewability
 plt.show()
+
+#This script needs to be reviewed for quality and accuracy, final product needs to be 
+#checked against real-world values 
