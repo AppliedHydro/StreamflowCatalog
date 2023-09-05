@@ -23,6 +23,7 @@ WAt, WAc, WAd, WAu = 0,0,0,0
 
 ctr = 1 #used to index values
 print(f"There are {wb.max_row} rows in the catalog")
+other_val = 0
 for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=1,max_col=1):
     for cell in rows:
         ctr += 1
@@ -51,8 +52,9 @@ for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=1,max_col=1):
             else:
                 WAd += 1
         else:
-            print(ctr)
+            other_val += 1
             pass
+print(f"There are {other_val} unclarified values in measurement frequencies")
 
 tbl = [['Idaho',IDt,IDc,IDd,IDu],['Oregon',ORt,ORc,ORd,ORu],['Washington',WAt,WAc,WAd,WAu]]
 Headers1 = ['State','Total','Continuous','Discrete','Unknown']
