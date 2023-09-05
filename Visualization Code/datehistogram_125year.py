@@ -1,9 +1,19 @@
+#####datehistogram_125year.py#####
+
+###################################################
+#Plots a date histogram, subsetted by continuous  #
+###################################################
+
 from datetime import datetime
 import openpyxl as px           #handles catalog data as dataframe object
 import matplotlib.pyplot as plt #visualizes data 
 import numpy as np              #collections of calculation tools
 
+#Variable
+#line 17 : edit file directory to local address of streamflow catalog
+
 #import catalog as dataframe object
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 
@@ -13,8 +23,9 @@ unknown = []
 counter = 1
 
 #iterate through date values, discard 'unknowns' and convert rest into datetime object
+print(f"There are {wb.max_row} rows in the streamflow catalog")
 try:
-    for row in wb.iter_rows(min_col=15,max_col=15,min_row=2,max_row=26871):
+    for row in wb.iter_rows(min_col=15,max_col=15,min_row=2,max_row=wb.max_row):
         for cell in row:
             counter += 1
             date_format = ('%Y-%m-%d %H:%M:%S')
@@ -44,7 +55,7 @@ except: #checks to ensure all values have been handled
 totals = []
 counter = 0
 try:        #calculate time total between start and end dates
-    for i in range(0,25526):
+    for i in range(0,wb.max_row):
         var = int(years_end[counter]) - int(years_start[counter])
         totals.append(var)
         counter += 1
