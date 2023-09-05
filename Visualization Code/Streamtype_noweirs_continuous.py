@@ -1,3 +1,8 @@
+#####Streamtype_noweirs_continuous.py#####
+
+#############
+#Plots streamtypes
+
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
