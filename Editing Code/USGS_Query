@@ -1,16 +1,12 @@
-##########
-#Query start/end dates for USGS gages from nwis server and write to streamflow catalog
-#last update: 4.27.2023
-#
-#processes:
-#   import Excel file, extract USGS gage id
-#   query site data from nwis
-#   parse start/end dates
-#   write to Excel file
-#   FACT CHECK!!
-##########
+#####USGS_Query.py#####
 
+########################################################################################
+#Query start/end dates for USGS gages from nwis server and write to streamflow catalog #
+#last update: 4.27.2023                                                                #
+########################################################################################
 
+#Variables
+#file_path (line 18)  : local file path for streamflow catalog in .xlsx format
 
 import re
 import requests
