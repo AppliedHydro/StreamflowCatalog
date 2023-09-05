@@ -1,9 +1,19 @@
+#####TriPlot_samplingtype.py#####
+
+##############################################################################
+#visualizes a triplot that shows sampling type by state, excludes USGS gages #
+##############################################################################
+
+#Variables
+#line 17 : edit file path to streamflow catalog on local machine
+
 import openpyxl as px
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib as mpl
 
 #import workbook as iterable dataframe object
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 
@@ -11,9 +21,11 @@ OR_cont,OR_misc,OR_unk = [],[],[]
 WA_cont,WA_misc,WA_unk = [],[],[]
 ID_cont,ID_misc,ID_unk = [],[],[]
 counter = 1
+print(f"There are {wb.max_row} rows in the catalog")
 
 #iterator to sort cell values into sampling type
-for row in wb.iter_rows(min_row=2,max_row=26871,min_col=21,max_col=21):
+other_val = 0
+for row in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=21,max_col=21):
     for cell in row:
         counter += 1
         if str(wb.cell(counter,2).value) == 'USGS':
@@ -33,7 +45,7 @@ for row in wb.iter_rows(min_row=2,max_row=26871,min_col=21,max_col=21):
                 OR_cont.append(var)
             elif str(wb.cell(counter,6).value) == 'Washington':
                 WA_cont.append(var)
-        elif var == 'seasonal' or var == 'synoptic':
+        elif var == 'seasonal' or var == 'synoptic' or var == 'discrete':
             if str(wb.cell(counter,6).value) == 'Idaho':
                 ID_misc.append(var)
             elif str(wb.cell(counter,6).value) == 'Oregon':
@@ -42,9 +54,10 @@ for row in wb.iter_rows(min_row=2,max_row=26871,min_col=21,max_col=21):
                 WA_misc.append(var)
                 
         else:
-            print(var)
+            other_val += 1
             pass
-
+print(f"There are {other_val} unclarified values in the catalog")
+      
 #define data variables for graphic
 ID_tot = len(ID_cont) + len(ID_misc) + len(ID_unk)
 OR_tot = len(OR_cont) + len(OR_misc) + len(OR_unk)
@@ -56,6 +69,7 @@ cont_tot = (len(ID_cont),len(OR_cont),len(WA_cont))
 
 categories = ['Unknown','Miscellaneous','Continuous(%)']
 gages_no = ['Idaho : %s' % ID_tot,'Oregon : %s' % OR_tot,'Washington : %s' % WA_tot]
+
 #convert data to percentages
 results = { 
     str(ID_tot):[round((len(ID_unk)/ID_tot)*100,1),round((len(ID_misc)/ID_tot)*100,1),round((len(ID_cont)/ID_tot)*100,1)],
@@ -97,33 +111,10 @@ def PlotDat(results, categories):
     ax.bar_label(rects, gages_no, padding=0.5)
     ax.set_ylabel('quantity')
     return fig, ax
-"""
-cont1 = [round((len(ID_cont)/ID_tot)*100,1),round((len(OR_cont)/OR_tot)*100,1),round((len(WA_cont)/WA_tot)*100,1)]
-misc1 = [round((len(ID_misc)/ID_tot)*100,1),round((len(OR_misc)/OR_tot)*100,1),round((len(WA_misc)/WA_tot)*100,1)]
-unk1 = [round((len(ID_unk)/ID_tot)*100,1),round((len(OR_unk)/OR_tot)*100,1),round((len(WA_unk)/WA_tot)*100,1)]
-x=[97.9,7.6,6.5]
-y=[1.1,92.1,93.5]
-z=[1,0.3,0]
-
-fig, ax = plt.subplots()
-width = 0.45
-a = ax.bar(gages_no, x, width, label='Continuous',color='gold')
-b = ax.bar(gages_no, y, width, label='Discrete',bottom=x,color='darkorange')
-c = ax.bar(gages_no, z, width, label='Unknown',color='wheat')
-ax.bar_label(a, label_type='center', color='black',padding=3)
-ax.bar_label(b, label_type='center', color='black',padding=3)
-ax.bar_label(c, label_type='center', color='black',padding=3)
-ax.set_ylabel('Percentages')
-ax.legend(ncol=len(categories),bbox_to_anchor=(0, 1),loc='lower left', fontsize='small')
-plt.show()
-"""
-
-cont1 = [round((len(ID_cont)/ID_tot)*100,1),round((len(OR_cont)/OR_tot)*100,1),round((len(WA_cont)/WA_tot)*100,1)]
-misc1 = [round((len(ID_misc)/ID_tot)*100,1),round((len(OR_misc)/OR_tot)*100,1),round((len(WA_misc)/WA_tot)*100,1)]
-unk1 = [round((len(ID_unk)/ID_tot)*100,1),round((len(OR_unk)/OR_tot)*100,1),round((len(WA_unk)/WA_tot)*100,1)]
-x=[1294,993,406]
-y=[15,11996,5886]
-z=[13,36,0]
+    
+x = [round((len(ID_cont)/ID_tot)*100,1),round((len(OR_cont)/OR_tot)*100,1),round((len(WA_cont)/WA_tot)*100,1)]
+y = [round((len(ID_misc)/ID_tot)*100,1),round((len(OR_misc)/OR_tot)*100,1),round((len(WA_misc)/WA_tot)*100,1)]
+z = [round((len(ID_unk)/ID_tot)*100,1),round((len(OR_unk)/OR_tot)*100,1),round((len(WA_unk)/WA_tot)*100,1)]
 
 fig, ax = plt.subplots()
 width = 0.45
@@ -136,4 +127,3 @@ ax.bar_label(c, label_type='center', color='black',padding=3)
 ax.set_ylabel('gage totals')
 ax.legend(ncol=len(categories),bbox_to_anchor=(0, 1),loc='lower left', fontsize='small')
 plt.show()
-            
