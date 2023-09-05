@@ -1,9 +1,20 @@
+#####activeinactive_continuous_withoutUSGS.py#####
+
+#############################################################################
+#charts gages based on active/inactive, subsetted to only continuous gages  #
+#excludes USGS gages                                                        #
+#############################################################################
+
+#Variables 
+#line 17 : edit file path to streamflow catalog local address
+
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
 import matplotlib as mpl
 
 #import catalog and process into openpyxl dataframe
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 OR_inact,OR_act = [],[]
@@ -12,9 +23,10 @@ WA_inact,WA_act = [],[]
 ID_unk,OR_unk,WA_unk = [],[],[]
 
 #function to sort by state and active designation
+print(f"There are {wb.max_row} gages in the catalog")
 def ActiveCounter():
     counter = 1
-    for row in wb.iter_rows(min_col=21,max_col=21,min_row=2,max_row=26871):
+    for row in wb.iter_rows(min_col=21,max_col=21,min_row=2,max_row=wb.max_row):
         for cell in row:
             var = str(cell.value).lower()
             counter += 1
