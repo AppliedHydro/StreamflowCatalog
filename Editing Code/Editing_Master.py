@@ -1,3 +1,13 @@
+#####Editing_Master.py#####
+
+#####################################################################################
+#This is a master file with sections used for text/value editing in the catalog.    # 
+#The scripts were run in discrete sections rather than as a top-to-bottom execution #.
+#####################################################################################
+
+#Variables
+#w_dir (line 17) : local file path for streamflow catalog in .xlsx format
+
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
@@ -18,6 +28,7 @@ for val in wb.iter_rows(min_col=1,max_col=1):
         maxrow += 1
 maxrow = maxrow - 1
 print(f"Streamflow catalog is {maxrow} lines")
+
 #------------------------------------------------------
 #replacing dates with YYYY with 1/1/YYYY for consistant formatting
 #------------------------------------------------------
@@ -41,7 +52,7 @@ workbook.save('C:/Users/sjsch/Desktop/Kendra/brpdates.xlsx')
 #checking for empty latitude/longitude fields
 #------------------------------------------------------
 counter = 1
-checks = []
+checks = [] #this list will have the row numbers of any empties
 for rows in wb.iter_rows(min_row=2,max_row=maxrow,min_col=11,max_col=11):
     for cell in rows:
         counter += 1
