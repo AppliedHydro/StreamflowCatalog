@@ -1,3 +1,13 @@
+#####Streamtype_noweirs.py#####
+
+##############################################################################
+#This plot shows numbers of each streamtype separated by state and excluding #
+#the streamtype 'weir'                                                       #
+##############################################################################
+
+#Variables
+#workbook (line 17) : include file path for streamflow catalog
+
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
@@ -51,6 +61,8 @@ for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=26883):
                 WA_stream.append(var)
         else:
             exceptions.append(str(counter)+ var)
+
+#Plot visualizations
 
 labels = ['Idaho','Oregon','Washington']
 canal = [len(ID_canal),len(OR_canal),len(WA_canal)]
