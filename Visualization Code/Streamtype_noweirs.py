@@ -23,6 +23,7 @@ I, O, W = 'Idaho','Oregon','Washington'
 exceptions = []
 counter = 1
 
+print("Sorting through values...")
 #iterator for sorting values into variable containers
 for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=26883):
     for cell in row:
@@ -62,8 +63,9 @@ for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=26883):
         else:
             exceptions.append(str(counter)+ var)
 
-#Plot visualizations
 
+print("Sorting complete")
+#Plot visualizations
 labels = ['Idaho','Oregon','Washington']
 canal = [len(ID_canal),len(OR_canal),len(WA_canal)]
 weir = [len(ID_weir),len(OR_weir),len(WA_weir)]
