@@ -1,3 +1,14 @@
+#####Combine_Duplicates.py#####
+
+########################################################################################
+#Due to many duplicate gages in the USGS dataset that are identical in all aspects     #
+#except for start-and dates. This code extracts the earliest start and latest end date #
+#to create a single gage location.                                                     #
+########################################################################################
+
+#Variables
+#file_path (line 25) : local file path of the streamflow catalog in .xlsx format
+
 import openpyxl as px
 from datetime import datetime
 
@@ -20,10 +31,10 @@ data_dict = {}
 for row in worksheet.iter_rows(min_row=2, values_only=True):
     source = row[1]  
     
-    # Only consider rows where the source is 'USGS' #Use the USGS organization tag as a filter
+    # Only consider rows where the source is 'USGS', Use the USGS organization tag as a filter
     if source != 'USGS':
         continue
-    unique_identifier = row[2]  # Assuming the unique identifier is in the third column
+    unique_identifier = row[2]
     # Ignore rows with 'none', 'N/A', or blank unique identifiers
     if unique_identifier is None or (isinstance(unique_identifier, str) and unique_identifier.lower() in ('none', 'n/a', '')):
         continue
