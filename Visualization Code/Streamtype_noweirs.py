@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
 import matplotlib as mpl
 
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 
