@@ -1,4 +1,14 @@
 # StreamflowCatalog
+https://www.mdpi.com/2073-4441/15/4/679
+
+The Streamflow Catalog project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. 
+
+-----Using the Code-----
+The code is split into 2 different sections and is not intened to be run in sequence. 
+a) Editing code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Editing%20Code) holds all of the scripts that were used for edits throughout the compilation process.
+
+b) Visualization code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Visualization%20Code) is the folder where all code used for graphic visualizations is stored. This includes graphics used internally and for the publication.
+
 
 The following modules are necessary to successfully execute the catalog code. Below are the web sources
 as well as installation instruction through command prompt. Python 3.0 or greater is required. Code was
