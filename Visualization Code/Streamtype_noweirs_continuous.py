@@ -1,7 +1,8 @@
 #####Streamtype_noweirs_continuous.py#####
 
-#############
-#Plots streamtypes
+#####################################################################################
+#Plots streamtypes by state, excluding weirs, and subsets to only continuous gages  #
+#####################################################################################
 
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
