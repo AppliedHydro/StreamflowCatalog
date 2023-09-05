@@ -1,19 +1,30 @@
+#####measurementinterval_bar.py#####
+
+######################################################
+#Bar chart graphic that  shows measurement intervals #
+######################################################
+
+#Variables
+#line 16 : correct directory to local streamflow catalog address
+
 import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
 import matplotlib as mpl
 
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
+print(f"There are {wb.max_row} rows in the catalog")
+
 counter = 1
 unique = ['None',]
-
 hourly,daily,unknown = [],[],[]
 min15,instant,annual = [],[],[]
 min30, monthly = [],[]
 
 #iterators to sort through unique values and evaluate measurement intervals
-for row in wb.iter_rows(min_row=2,max_row=26883,min_col=20,max_col=20):
+for row in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=20,max_col=20):
     for cell in row:
         if str(cell.value) in unique:
             pass
@@ -21,7 +32,7 @@ for row in wb.iter_rows(min_row=2,max_row=26883,min_col=20,max_col=20):
             pass
         else:
             unique.append(cell.value)
-for rows in wb.iter_rows(min_row=2,max_row=26883,min_col=20,max_col=20):
+for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=20,max_col=20):
     for cell in rows:
         counter += 1
         var = str(cell.value).lower()
