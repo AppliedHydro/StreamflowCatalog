@@ -1,7 +1,18 @@
+#####TableUpdater.py#####
+
+####################################################################################
+#Used to create a statistics table for gage totals by state, gage types by state,  #
+#active/inactive by state, measurement frequency by state                          #
+####################################################################################
+
+#Variables
+#Edit (line 15) to local file path of streamflow catalog
+
 import openpyxl as px
 import numpy as np
 from tabulate import tabulate
 
+print("Importing catalog...")
 workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
 wb = workbook.active
 
@@ -9,8 +20,10 @@ wb = workbook.active
 IDt, IDc, IDd, IDu = 0,0,0,0
 ORt, ORc, ORd, ORu = 0,0,0,0
 WAt, WAc, WAd, WAu = 0,0,0,0
+
 ctr = 1 #used to index values
-for rows in wb.iter_rows(min_row=2,max_row=26883,min_col=1,max_col=1):
+print(f"There are {wb.max_row} rows in the catalog")
+for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=1,max_col=1):
     for cell in rows:
         ctr += 1
         if str(wb.cell(ctr,6).value) == 'Idaho':
@@ -49,7 +62,7 @@ instant, fifteenmin, thirtymin = 0,0,0
 hourly, daily, annual, unknown = 0,0,0,0
 monthly = 0
 ctr = 1
-for rows in wb.iter_rows(min_row=2,max_row=26850,min_col=20,max_col=20):
+for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=20,max_col=20):
     for cell in rows:
         ctr += 1
         if str(cell.value) == 'hourly':
@@ -84,7 +97,7 @@ orcanal,orstream,or_unk = 0,0,0
 wacanal,wastream,wa_unk = 0,0,0
 ctr = 1
 
-for rows in wb.iter_rows(min_row=2,max_row=26850,min_col=21,max_col=21):
+for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=21,max_col=21):
     for cell in rows:
         ctr += 1
         if str(cell.value) == 'continuous' or str(cell.value) == 'seasonal':
@@ -118,7 +131,7 @@ for rows in wb.iter_rows(min_row=2,max_row=26850,min_col=21,max_col=21):
             pass
 
 ctr = 1
-for rows in wb.iter_rows(min_row=2,max_row=26850,min_col=21,max_col=21):
+for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=21,max_col=21):
     for cell in rows:
         ctr += 1
         if str(cell.value) == 'continuous' or str(cell.value) == 'seasonal':
