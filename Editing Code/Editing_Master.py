@@ -13,31 +13,36 @@ import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
 import matplotlib as mpl
 
-w_dir = 'C:/Users/sjsch/Desktop/Kendra/burpdates.xlsx' #streamflow catalog pathway
+w_dir = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_catalog.xlsx' #streamflow catalog pathway
 workbook = px.open(w_dir)
 wb = workbook.active
 
 #------------------------------------------------------
 #checking for streamflow catalog length
 #------------------------------------------------------
-cat_total = 0
-maxrow = 1
-for val in wb.iter_rows(min_col=1,max_col=1):
-    while wb.cell(maxrow,1).value is not None:
-        cat_total += 1
-        maxrow += 1
-maxrow = maxrow - 1
-print(f"Streamflow catalog is {maxrow} lines")
+def get_length(wb): 
+    for i in range(1, ws.max_row):
+        if ws.cell(i, 1).value is None:
+            index_row.append(i)
+    for row_del in range(len(index_row)):
+        ws.delete_rows(idx=index_row[row_del], amount=1)
+    maxrow = wb.max_row
+    print(f"Streamflow catalog is {maxrow} lines")
+    return maxrow
 
 #------------------------------------------------------
 #replacing dates with YYYY with 1/1/YYYY for consistant formatting
 #------------------------------------------------------
-counter = 0
-for rows in wb.iter_rows(min_row=1,max_row=12671,min_col=1,max_col=1): #gage start dates
-    for cell in rows:
-        counter += 1
-        date = str(cell.value)
-        cell.value = ('1/1/'+date)
+
+def year_editor():
+    err_msg = 'incorrect year values'
+    counter = 0
+    for rows in wb.iter_rows(min_row=1,max_row=12671,min_col=1,max_col=1): #gage start dates
+        for cell in rows:
+            counter += 1
+            date = str(cell.value)wb.cell(34406,1)
+            assert len(date) == 4,err_msg
+            cell.value = ('1/1/'+date)
     
 counter = 0
 for rows in wb.iter_rows(min_row=1,max_row=12671,min_col=2,max_col=2): #gage end dates
