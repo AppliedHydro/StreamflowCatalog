@@ -136,13 +136,20 @@ for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=maxrow): #row 9 = 
         elif str(cell.value) in unique:
             pass
 
-type_data = []
-counter = 1
-for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=maxrow):
-    for cell in row:
-        type_data.append(streamtype(wb.cell(counter,9).value,wb.cell(counter,6).value))
-        counter += 1
-type_data = list(filter(lambda item: item.state is not None, type_data))
+def make_list() -> list:
+    """
+    lines 113 - 126 must be run to execute successfully. Return object will be
+    list variable of streamtype objects for stream_counter()
+    """
+    global type_data
+    type_data = []
+    counter = 1
+    for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=maxrow):
+        for cell in row:
+            type_data.append(streamtype(wb.cell(counter,9).value,wb.cell(counter,6).value))
+            counter += 1
+    type_data = list(filter(lambda item: item.state is not None, type_data))
+    print('List name: type_data')
 
 def stream_counter(type_data):
     """
