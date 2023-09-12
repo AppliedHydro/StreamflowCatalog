@@ -107,7 +107,7 @@ except:             #handles any exceptions outside of parameters
     raise
 
 #------------------------------------------------------
-#checking for streamtype values subset by state
+#checking for streamtype values subset by state, gage quantites by state
 #------------------------------------------------------
 
 import openpyxl as px
@@ -150,13 +150,28 @@ def stream_counter(type_data):
     parse number of streams of each type subset by state.
     @type_data : list of streamtype class objects with self.stream, self.state attributes
     """
+    allowed = ['Idaho','Washington','Oregon']
     usr_state = input('input full state name (ex. Idaho): ')
+    err_msg = 'State name not recognized. Check spelling/capitalization'
+    assert usr_state in allowed,err_msg
     stream_total = []
     for val in type_data:
         if usr_state == val.state:
             stream_total.append(val)
-    print(len(stream_total))
+    print('\n' * 3)
+    print(f'{len(stream_total)} gages located in {usr_state}')
     strm = sum(val.stream == 'stream' for val in stream_total)
     canl = sum(val.stream == 'canal' for val in stream_total)
     weir = sum(val.stream == 'weir' for val in stream_total)
     print(f'There are: \na. {strm} streams\nb. {canl} canals\nc. {weir} weirs')
+    print('\n' * 3)
+    stream_counter(type_data)
+
+
+def state_counter(type_data):
+    usr_state = input('Input state name (ex. Washington): ')
+    err_msg = 'State name not recognized. Check spelling/capitalization'
+    allowed = ['Idaho','Washington','Oregon']
+    assert usr_state in allowed,err_msg
+    return sum(val.state == usr_state for val in type_data)
+    
