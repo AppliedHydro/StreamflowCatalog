@@ -12,6 +12,8 @@ import openpyxl as px             #handles catalog as dataframe
 import matplotlib.pyplot as plt   #visualizes data
 import numpy as np                #mathematical library with built-in calculation tools
 import matplotlib as mpl
+from datetime import datetime, date
+from collections import Counter
 
 w_dir = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx' #streamflow catalog pathway
 workbook = px.open(w_dir)
@@ -68,43 +70,56 @@ def empty_latlon():
 #------------------------------------------------------
 #checking for empty date fields/erroneous default values
 #------------------------------------------------------
-years_start = []
-years_end = []
-unknown = []
-counter = 1
-try:
-    for row in wb.iter_rows(min_col=6,max_col=6,min_row=2,max_row=maxrow):
-        for cell in row:
-            counter += 1
-            date_format = ('%Y-%m-%d %H:%M:%S')
-            date_format1 = ('%H:%M:%S')
-            var = str(cell.value).lower()
-            if var == 'none':
-                if str(wb.cell(counter,16).value) == 'None':
+def date_correct() -> list:
+    years_start, years_end, unknown = [],[],[]
+    counter = 1
+    date_format = ('%Y-%m-%d %H:%M:%S')
+    today = datetime.now()
+    today = today.strftime(date_format)
+    try:
+        for row in wb.iter_rows(min_col=15,max_col=15,min_row=2,max_row=maxrow):
+            for cell in row:
+                counter += 1
+                var = str(cell.value).lower()
+                if var == 'none' or var == 'NA':         #skips blank rows                    
+                    if str(wb.cell(counter,1).value) == 'None':
+                        continue
+                    else:
+                        unknown.append(var)
+                        continue
+                elif var == 'unknown':
+                    unknown.append(var)
+                    continue
+                elif var == '2/1/1857':         #autopopulated value found in some datasets
+                    years_start.append('1857')
+                    years_end.append('2022')
+                    break
+                elif str(wb.cell(counter,15).value) == '00:00:00':
                     continue
                 else:
-                    unknown.append(var)
-                    continue
-            elif var == 'unknown':
-                unknown.append(var)
-                continue
-            elif var == '2/1/1857':
-                years_start.append('1857')
-                years_end.append('2022')
-            elif str(wb.cell(counter,15).value) == '00:00:00':
-                continue
-            else:
-                if str(wb.cell(counter,16).value) == 'None' or str(wb.cell(counter,16).value).lower() == 'unknown':
-                    unknown.append(var)
-                    continue
-                date_s = datetime.strptime(var,date_format)
+                    if str(wb.cell(counter,16).value) == 'None' or str(wb.cell(counter,16).value).lower() == 'unknown' or str(wb.cell(counter,16).value) == 'NA':
+                        unknown.append(var)
+                        continue
+                if (wb.cell(counter,16).value) == 'current':
+                    wb.cell(counter,16).value = today
+                var_s, var_e = str(wb.cell(counter,15).value), str(wb.cell(counter,16).value)
+                try:
+                    date_s = datetime.strptime(var_s, date_format)
+                except ValueError:
+                    date_s = datetime.strptime(var_s, '%Y-%m-%d')
+                try:
+                    date_e = datetime.strptime(var_e, date_format)
+                except ValueError:
+                    date_e = datetime.strptime(var_e, '%Y-%m-%d')
                 years_start.append(date_s.year)
-                date_e = datetime.strptime(str(wb.cell(counter,16).value),date_format)
                 years_end.append(date_e.year)
                 continue
-except:             #handles any exceptions outside of parameters
-    print(counter)
-    raise
+        start = (Counter(years_start))
+        end = (Counter(years_end))
+        return start, end
+    except:  
+        print(f'Anomolous date parameter found at row {counter}')
+        raise
 
 #------------------------------------------------------
 #checking for streamtype values subset by state, gage quantites by state
@@ -124,19 +139,25 @@ class streamtype:
     def __init__(self,stream,state):
         self.stream = stream
         self.state = state
+        
+def find_unique() -> list(unique):
+    """
+    iterates through streamtypes in streamflow catalog to create list of
+    unique names. Can be use as reference
+    """
+    global unique
+    unique = []   
+    for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=maxrow): #row 9 = streamtype
+        for cell in row:
+            cell.value = str(cell.value).rstrip() #remove problematic white spaces
+            if str(cell.value) not in unique:
+                unique.append(str(cell.value))
+                continue
+            elif str(cell.value) in unique:
+                pass
+    return unique
 
-#checks all unique values in 'stream type' column for referencing
-unique = []   
-for row in wb.iter_rows(min_col=9,max_col=9,min_row=2,max_row=maxrow): #row 9 = streamtype
-    for cell in row:
-        cell.value = str(cell.value).rstrip() #remove problematic white spaces
-        if str(cell.value) not in unique:
-            unique.append(str(cell.value))
-            continue
-        elif str(cell.value) in unique:
-            pass
-
-def make_list() -> list:
+def make_list() -> list(type_data):
     """
     lines 113 - 126 must be run to execute successfully. Return object will be
     list variable of streamtype objects for stream_counter()
@@ -175,7 +196,7 @@ def stream_counter(type_data):
     stream_counter(type_data)
 
 
-def state_counter(type_data):
+def state_counter(type_data) -> int:
     usr_state = input('Input state name (ex. Washington): ')
     err_msg = 'State name not recognized. Check spelling/capitalization'
     allowed = ['Idaho','Washington','Oregon']
