@@ -125,15 +125,6 @@ def date_correct() -> list:
 #checking for streamtype values subset by state, gage quantites by state
 #------------------------------------------------------
 
-import openpyxl as px
-import operator as op
-from collections import Counter
-
-w_dir = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx' #streamflow catalog pathway
-workbook = px.open(w_dir)
-wb = workbook.active
-maxrow = wb.max_row
-
 #Creates a 'streamtype' class where state,stream types can be easily accessed
 class streamtype:
     def __init__(self,stream,state):
