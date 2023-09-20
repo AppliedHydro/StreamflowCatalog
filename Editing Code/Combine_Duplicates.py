@@ -13,6 +13,9 @@ import openpyxl as px
 from datetime import datetime
 
 def extract_date_components(date_value):
+    """
+    pulls dates in YYYY-MM-DD format from cells
+    """
     if date_value is None:
         return None, None, None
     date_str = str(date_value)
@@ -42,7 +45,8 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if not isinstance(unique_identifier, (int, float)):
         continue
     
-    start_date, start_month, start_day = extract_date_components(row[14])      end_date, end_month, end_day = extract_date_components(row[15])  
+    start_date, start_month, start_day = extract_date_components(row[14])      
+    end_date, end_month, end_day = extract_date_components(row[15])  
     
     if unique_identifier in data_dict:
         data_dict[unique_identifier]['rows'].append(row)
