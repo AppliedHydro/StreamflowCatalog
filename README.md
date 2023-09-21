@@ -20,7 +20,41 @@ follow the steps below to install. Python 3.0 or greater is required. Code was w
 
 -[matplotlib](https://matplotlib.org/) version 3.5.2
 
-###Step 1:
+## Step 1: Checking if Libraries are Installed
+
+In your terminal, run the following code:
+
+'''
+$ pip list
+'''
+
+This call returns a list of all installed python packages. Verify that these packages are installed before attempting to run the code.
+
+## Step 2: Installing New Libraries
+
+In your terminal, run the following code:
+
+'''
+$ pip install *library*
+'''
+
+where *library* is the library you wish to install. Below is an example for installing the Python library matplotlib:
+
+'''
+$ pip install matplotlib
+'''
+
+Your machine will source, download, and install the matplotlib library. As long as no errors are thrown, you will now have access to matplotlib!
+To double check that the library was installed properly, run the following code:
+
+'''
+$ python
+$ import matplotlib as plt
+'''
+
+
+
+
 
 Install t
 a) Editing code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Editing%20Code) holds all of the scripts that were used for edits throughout the compilation process.
