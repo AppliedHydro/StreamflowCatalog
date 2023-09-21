@@ -64,7 +64,7 @@ The code contained in this repository has a wide array of applications regarding
 in sequence. Several scripts were created to handle syntax/formatting problems specific to individual data sets and therefore are not
 applicable to every data set used in this project. Wherever possible, the target data set will be listed at the top of the script.
 
-The codes are split into two different sections:
+The codes are split into two different folders:
 
 * Editing Code       | purpose is to configure data sets to catalog standards and naming conventions, fix null values, and query data
 * Visualization Code | used for creation of tables, graphs etc. used for publications and literature
@@ -76,7 +76,7 @@ up-to-date graphics and statistics of the catalog.
 ## Input Files
 
 The Streamflow Catalog is handled as an .xlsx or .csv depending on the code operation. The master catalog file is kept and maintained on a
-private shared drive and distributed by request.
-  
-
+private shared drive and distributed by request. There is a [catalog copy](https://github.com/AppliedHydro/StreamflowCatalog/blob/main/Streamflow_Catalog.xlsx)
+in the main repository folder that is available for viewing and download. Be aware that this is possibly ** not ** the most updated version of
+the catalog and should only be used as a reference.
 
