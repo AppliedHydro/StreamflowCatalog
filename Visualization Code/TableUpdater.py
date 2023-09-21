@@ -2,7 +2,10 @@
 
 ####################################################################################
 #Used to create a statistics table for gage totals by state, gage types by state,  #
-#active/inactive by state, measurement frequency by state                          #
+#active/inactive by state, measurement frequency by state. Please note that there  #
+#are potentially a small quantity of gages that are on PNW borders (e.g. Wyoming)  #
+#that will be hanled as 'unclarified values' and will not be includes in the       #
+#table statistics.
 ####################################################################################
 
 #Variables
@@ -12,7 +15,7 @@ import openpyxl as px
 import numpy as np
 from tabulate import tabulate
 
-catalog_path = localpath
+catalog_path = 'C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx'
 print("Importing catalog...")
 workbook = px.open(catalog_path)
 wb = workbook.active
@@ -28,7 +31,9 @@ other_val = 0
 for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=1,max_col=1):
     for cell in rows:
         ctr += 1
-        if str(wb.cell(ctr,6).value) == 'Idaho':
+        if cell.value is None:
+            continue
+        elif str(wb.cell(ctr,6).value) == 'Idaho':
             IDt += 1
             if str(wb.cell(ctr,21).value) == 'continuous':
                 IDc += 1
@@ -53,6 +58,7 @@ for rows in wb.iter_rows(min_row=2,max_row=wb.max_row,min_col=1,max_col=1):
             else:
                 WAd += 1
         else:
+            print(f'Unclear value at row {ctr}')
             other_val += 1
             pass
 print(f"There are {other_val} unclarified values in measurement frequencies")
@@ -170,5 +176,3 @@ tbl3 = [['ID',ID,idact,idinact,idunk,idcanal,idstream,id_unk],['OR',OR,oract,ori
         ['WA',WA,waact,wainact,waunk,wacanal,wastream,wa_unk],['PNW total',(WA+OR+ID),sumact,suminact,sumunk,sumcanal,sumstream,sum_unk]]
 Headers3 = ['State','Total','Active','Inactive','Unknown','Canal','Stream','Unknown']
 print(tabulate(tbl3,headers=Headers3,tablefmt='fancy_grid'))
-        
-        
