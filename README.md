@@ -20,6 +20,12 @@ follow the steps below to install. Python 3.0 or greater is required. Code was w
 
 -[matplotlib](https://matplotlib.org/) version 3.5.2
 
+-[dataretrieval](https://github.com/DOI-USGS/dataretrieval-python)
+
+-[requests](https://pypi.org/project/requests/)
+
+-[re](https://docs.python.org/3/library/re.html)
+
 ## Step 1: Checking if Libraries are Installed
 
 In your terminal, run the following code:
@@ -52,59 +58,3 @@ $ python
 $ import matplotlib as plt
 ```
 
-
-
-
-
-Install t
-a) Editing code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Editing%20Code) holds all of the scripts that were used for edits throughout the compilation process.
-
-b) Visualization code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Visualization%20Code) is the folder where all code used for graphic visualizations is stored. This includes graphics used internally and for the publication.
-
-
-The following modules are necessary to successfully execute the catalog code. Below are the web sources
-as well as installation instruction through command prompt. Python 3.0 or greater is required. Code was
-written and executed on Python v. 3.9.7.
-
-Editing_Master.py is the master editing file that contains examples of the code used to evaluate streamflow
-catalog to check for misspellings, standardization issues, and empty fields. Many incorrect field edits were 
-made manually on a case-by-case basis.
-
-Catalog_Master.py is the python script to sort data and create graph visualizations using matplotlib.
-
-
-(1) 	
-NumPy
-version 1.23.1
-https://numpy.org/
-
-a) installation through command prompt:
-	$pip install numpy
-b) double check module was installed correctly:
-	$pip show numpy
-<show> command will show module name, version number, and file location. <package not found> will indicate
-the module didn't install correctly.
-
-(2)
-openpyxl 
-version 3.0.10
-https://openpyxl.readthedocs.io/en/stable/#
-
-a) installation through command prompt:
-	$pip install openpyxl
-b) double check module was installed correctly:
-	$pip show openpyxl
-<show> command will show module name, version number, and file location. <package not found> will indicate
-the module didn't install correctly.
-
-(3)
-matplotlib
-version 3.5.2
-https://matplotlib.org/
-
-a) installation through command prompt:
-	$pip install matplotlib
-b) double check module was installed correctly:
-	$pip show matplotlib
-<show> command will show module name, version number, and file location. <package not found> will indicate
-the module didn't install correctly.
