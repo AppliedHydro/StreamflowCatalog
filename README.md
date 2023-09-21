@@ -20,11 +20,10 @@ follow the steps below to install. Python 3.0 or greater is required. Code was w
 
 -[matplotlib](https://matplotlib.org/) version 3.5.2
 
--[dataretrieval](https://github.com/DOI-USGS/dataretrieval-python)
+-[dataretrieval](https://github.com/DOI-USGS/dataretrieval-python) version 0.7
 
--[requests](https://pypi.org/project/requests/)
+-[requests](https://pypi.org/project/requests/) version 2.28.1
 
--[re](https://docs.python.org/3/library/re.html)
 
 ## Step 1: Checking if Libraries are Installed
 
@@ -57,4 +56,17 @@ To double check that the library was installed properly, run the following code:
 $ python
 $ import matplotlib as plt
 ```
+
+## Running the Code
+
+The code contained in this repository has a wide array of applications regarding the Streamflow Catalog and is not intended to be run
+in sequence. Several scripts were created to handle syntax/formatting problems specific to individual data sets and therefore are not
+applicable to every data set used in this project. Wherever possible, the target data set will be listed at the top of the script.
+
+The codes are split into two different sections:
+
+* Editing Code | purpose is to configure data sets to catalog standards and naming conventions, fix null values, and query data
+* Visualization Code | used for creation of tables, graphs etc. used for publications and literature
+  
+
 
