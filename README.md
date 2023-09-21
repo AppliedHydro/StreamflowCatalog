@@ -1,6 +1,6 @@
 # StreamflowCatalog
 
-The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. 
+The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. This repository contains the major code that was used in the development and maintenance of the catalog along with a version of the Streamflow Catalog. The project was a joint effort between the Department of Geosciences at Boise State University and U.S. Geological Survey, Northwest-Pacific Island Region.
 
 
 ## Contacts
@@ -77,6 +77,6 @@ up-to-date graphics and statistics of the catalog.
 
 The Streamflow Catalog is handled as an .xlsx or .csv depending on the code operation. The master catalog file is kept and maintained on a
 private shared drive and distributed by request. There is a [catalog copy](https://github.com/AppliedHydro/StreamflowCatalog/blob/main/Streamflow_Catalog.xlsx)
-in the main repository folder that is available for viewing and download. Be aware that this is possibly ** not ** the most updated version of
-the catalog and should only be used as a reference.
+in the main repository folder that is available for viewing and download. Be aware that this is possibly **not** the most updated version of
+the catalog and should only be used as a temporary reference.
 
