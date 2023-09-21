@@ -2,6 +2,7 @@
 
 The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. 
 
+
 ## Contacts
 
 Kendra Kaiser (kendrakaiser@boisestate.edu)
@@ -65,8 +66,17 @@ applicable to every data set used in this project. Wherever possible, the target
 
 The codes are split into two different sections:
 
-* Editing Code | purpose is to configure data sets to catalog standards and naming conventions, fix null values, and query data
+* Editing Code       | purpose is to configure data sets to catalog standards and naming conventions, fix null values, and query data
 * Visualization Code | used for creation of tables, graphs etc. used for publications and literature
+
+Code contained in the *Editing Code* folder will only be used as new data is added into the catalog. In other words, this is the toolbox for standardizing
+and processing all data before it is entered into the master streamflow catalog. Code in the *Visualization Code* folder can be run at any time to produce
+up-to-date graphics and statistics of the catalog. 
+
+## Input Files
+
+The Streamflow Catalog is handled as an .xlsx or .csv depending on the code operation. The master catalog file is kept and maintained on a
+private shared drive and distributed by request.
   
 
 
