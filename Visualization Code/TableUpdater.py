@@ -6,14 +6,15 @@
 ####################################################################################
 
 #Variables
-#Edit (line 15) to local file path of streamflow catalog
+#catalog_path: local address of streamflow catalog
 
 import openpyxl as px
 import numpy as np
 from tabulate import tabulate
 
+catalog_path = localpath
 print("Importing catalog...")
-workbook = px.open('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx')
+workbook = px.open(catalog_path)
 wb = workbook.active
 
 #list containers to hold gage totals for: overall, continuous, discrete, unknown
