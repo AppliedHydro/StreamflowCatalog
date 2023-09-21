@@ -40,17 +40,17 @@ This call returns a list of all installed python packages. Verify that these pac
 In your terminal, run the following code:
 
 ```
-$ pip install *library*
+$ pip install library
 ```
 
-where *library* is the library you wish to install. Below is an example for installing the Python library matplotlib:
+where *library* is the package you wish to install. Below is an example for installing the Python library matplotlib:
 
 ```
 $ pip install matplotlib
 ```
 
 Your machine will source, download, and install the matplotlib library. As long as no errors are thrown, you will now have access to matplotlib!
-To double check that the library was installed properly, run the following code:
+To double check that the library was installed properly, run the following code in your terminal:
 
 ```
 $ python
