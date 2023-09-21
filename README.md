@@ -4,8 +4,9 @@ The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an 
 
 ## Contacts
 
-*Kendra Kaiser (kendrakaiser@boisestate.edu)
-*Steven Schmitz (stevenschmitz@u.boisestate.edu)
+Kendra Kaiser (kendrakaiser@boisestate.edu)
+
+Steven Schmitz (stevenschmitz@u.boisestate.edu)
 
 
 ## Getting Started
@@ -14,7 +15,9 @@ Usage of these codes requires multiple external python libraries to execute that
 follow the steps below to install. Python 3.0 or greater is required. Code was written and executed on Python v. 3.9.7.
 
 -[OpenPyxl](https://openpyxl.readthedocs.io/en/stable/#) version 3.0.10
+
 -[NumPy](https://numpy.org/) version 1.23.1
+
 -[matplotlib](https://matplotlib.org/) version 3.5.2
 
 ###Step 1:
