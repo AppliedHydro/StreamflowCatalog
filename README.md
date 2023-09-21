@@ -1,9 +1,14 @@
 # StreamflowCatalog
-https://www.mdpi.com/2073-4441/15/4/679
 
-The Streamflow Catalog project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. 
+The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an effort to combine current and historical streamflow monitoring location information in the United States Pacific Northwest that has been obtained from 32 state and local organizations. Over 60% of the streamflow monitoring locations in the Streamflow Data Catalog are not available online and are thus not findable through web search engines. This repository is the compilation of code used to query, clean, and process the stream gage information that is the current version of the streamflow catalog. 
 
------Using the Code-----
+## Contacts
+
+Kendra Kaiser (kendrakaiser@boisestate.edu)
+Steven Schmitz (stevenschmitz@u.boisestate.edu)
+
+
+## Getting Started
 The code is split into 2 different sections and is not intened to be run in sequence. 
 a) Editing code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Editing%20Code) holds all of the scripts that were used for edits throughout the compilation process.
 
