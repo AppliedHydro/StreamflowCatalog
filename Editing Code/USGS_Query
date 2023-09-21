@@ -40,7 +40,7 @@ def find_dates(string):
 for row in wb.iter_rows(min_col=1,max_col=1):
     for cell in row:
         var = str(cell.value).lower()
-        counter +=1
+        counter += 1
         if var == 'usgs':
             USGS_gage_id.append(wb.cell(counter,2).value)
         else:
