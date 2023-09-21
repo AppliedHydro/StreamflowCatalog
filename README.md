@@ -4,12 +4,22 @@ The [Streamflow Catalog](https://www.mdpi.com/2073-4441/15/4/679) project is an 
 
 ## Contacts
 
-Kendra Kaiser (kendrakaiser@boisestate.edu)
-Steven Schmitz (stevenschmitz@u.boisestate.edu)
+*Kendra Kaiser (kendrakaiser@boisestate.edu)
+*Steven Schmitz (stevenschmitz@u.boisestate.edu)
 
 
 ## Getting Started
-The code is split into 2 different sections and is not intened to be run in sequence. 
+
+Usage of these codes requires multiple external python libraries to execute that are listed below. If these libraries are not on your machine,
+follow the steps below to install. Python 3.0 or greater is required. Code was written and executed on Python v. 3.9.7.
+
+-[OpenPyxl](https://openpyxl.readthedocs.io/en/stable/#) version 3.0.10
+-[NumPy](https://numpy.org/) version 1.23.1
+-[matplotlib](https://matplotlib.org/) version 3.5.2
+
+###Step 1:
+
+Install t
 a) Editing code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Editing%20Code) holds all of the scripts that were used for edits throughout the compilation process.
 
 b) Visualization code (https://github.com/AppliedHydro/StreamflowCatalog/tree/main/Visualization%20Code) is the folder where all code used for graphic visualizations is stored. This includes graphics used internally and for the publication.
