@@ -1,23 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import pandas as pd
 from collections import Counter
 import matplotlib.pyplot as plt
 
-
-# In[ ]:
-
-
 df = pd.read_excel('C:/Users/sjsch/Desktop/Kendra/Streamflow_Catalog.xlsx',sheet_name='Sheet1')
 df.info()
-
-
-# In[ ]:
-
 
 organizations = Counter(df['organization'])
 organizations = pd.DataFrame(organizations.items(),columns=['Organization','Quantity'])
@@ -38,11 +24,7 @@ filtered_counts = active_count[active_count['status'].isin(status_interest)]
 
 for index, row in filtered_counts.iterrows():
     organizations.loc[organizations['Organization'] == row['organization'], row['status']] = row['lat']
-
-
-# In[232]:
-
-
+    
 def state_plotter(org):
     """
     produces PiPlot that shows percentage of gages associated with input organization
@@ -89,10 +71,5 @@ def catalog_summary():
 def org_summary(org):
     company = organizations[organizations['Organization'] == org]
     return company
-
-
-# In[ ]:
-
-
 
 
