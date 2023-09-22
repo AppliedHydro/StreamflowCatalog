@@ -1,3 +1,14 @@
+##Organization_Summaries.py##
+
+####################################################################################################
+#This a helper code to access specific attributes of the streamflow catalog as it is updated,      #
+#specifically organization names, gage quantities, gage status, and gage locations subset          #
+#by state. The outputs are Pi Charts and data is handled as a pandas dataframe.                    #
+####################################################################################################
+
+#Variables:
+#(line 16) df : set local address of Streamflow Catalog in .xlsx format
+
 import pandas as pd
 from collections import Counter
 import matplotlib.pyplot as plt
