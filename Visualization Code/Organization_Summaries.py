@@ -36,7 +36,7 @@ filtered_counts = active_count[active_count['status'].isin(status_interest)]
 for index, row in filtered_counts.iterrows():
     organizations.loc[organizations['Organization'] == row['organization'], row['status']] = row['lat']
     
-def state_plotter(org):
+def state_plotter(org) -> plt.plot:
     """
     produces PiPlot that shows percentage of gages associated with input organization
     are in each state of interest. Input variable @org should be organizations name
@@ -56,7 +56,7 @@ def state_plotter(org):
     plt.tight_layout()
     plt.show()
     
-def active_plotter(org):
+def active_plotter(org) -> plt.plot:
     """
     produces PiPlot that shows percentage of gages active and inactive
     for input organization. Input variable @org should be organizations name
