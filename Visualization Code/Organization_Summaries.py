@@ -3,7 +3,7 @@
 ####################################################################################################
 #This a helper code to access specific attributes of the streamflow catalog as it is updated,      #
 #specifically organization names, gage quantities, gage status, and gage locations subset          #
-#by state. The outputs are Pi Charts and data is handled as a pandas dataframe.                    #
+#by state. The outputs are Pi Charts and data are handled as a pandas dataframe.                    #
 ####################################################################################################
 
 #Variables:
@@ -76,10 +76,18 @@ def active_plotter(org):
     plt.tight_layout()
     plt.show()
 
-def catalog_summary():
+def catalog_summary() -> pd.DataFrame:
+    """
+    Returns summary of Streamflow catalog as pandas dataframe, including gages by state,
+    percentage of catalog, gages by organization, active/inactive by organization.
+    """
     return organizations
 
-def org_summary(org):
+def org_summary(org) -> pd.DataFrame:
+    """
+    returns summary statistics of specific organization. Takes string
+    input to subset by company. 
+    """
     company = organizations[organizations['Organization'] == org]
     return company
 
